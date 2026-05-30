@@ -55,9 +55,7 @@
   /* Nav */
   nav {
     position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
+    top: 0; left: 0; right: 0;
     z-index: 100;
     padding: 20px 48px;
     display: flex;
@@ -93,11 +91,7 @@
     border: none;
     cursor: none;
   }
-  .nav-cta:hover {
-    background: var(--lime);
-    color: var(--black);
-    transform: translateY(-1px);
-  }
+  .nav-cta:hover { background: var(--lime); color: var(--black); transform: translateY(-1px); }
 
   /* Hero */
   .hero {
@@ -109,7 +103,6 @@
     position: relative;
     overflow: hidden;
   }
-
   .hero-eyebrow {
     display: inline-flex;
     align-items: center;
@@ -130,7 +123,6 @@
     height: 1px;
     background: var(--text-muted);
   }
-
   .hero-headline {
     font-family: var(--serif);
     font-size: clamp(52px, 7vw, 96px);
@@ -142,11 +134,7 @@
     opacity: 0;
     animation: fadeUp 0.8s 0.35s forwards;
   }
-  .hero-headline em {
-    font-style: italic;
-    color: var(--text-muted);
-  }
-
+  .hero-headline em { font-style: italic; color: var(--text-muted); }
   .hero-sub {
     font-size: 18px;
     font-weight: 400;
@@ -157,7 +145,6 @@
     opacity: 0;
     animation: fadeUp 0.8s 0.5s forwards;
   }
-
   .hero-actions {
     display: flex;
     align-items: center;
@@ -166,7 +153,6 @@
     opacity: 0;
     animation: fadeUp 0.8s 0.65s forwards;
   }
-
   .btn-primary {
     display: inline-flex;
     align-items: center;
@@ -196,13 +182,8 @@
   .btn-primary:hover::after { transform: translateX(0); }
   .btn-primary:hover { color: var(--black); transform: translateY(-2px); }
   .btn-primary span { position: relative; z-index: 1; }
-  .btn-primary .arrow {
-    position: relative;
-    z-index: 1;
-    transition: transform 0.2s;
-  }
+  .btn-primary .arrow { position: relative; z-index: 1; transition: transform 0.2s; }
   .btn-primary:hover .arrow { transform: translateX(4px); }
-
   .btn-ghost {
     font-size: 14px;
     font-weight: 500;
@@ -215,7 +196,6 @@
     cursor: none;
   }
   .btn-ghost:hover { color: var(--black); }
-
   .hero-price-note {
     font-size: 13px;
     color: var(--text-muted);
@@ -236,7 +216,6 @@
   }
   .marquee-track {
     display: flex;
-    gap: 0;
     animation: marquee 25s linear infinite;
     width: max-content;
   }
@@ -252,15 +231,9 @@
     color: var(--bone);
     white-space: nowrap;
   }
-  .marquee-dot {
-    width: 4px;
-    height: 4px;
-    background: var(--lime);
-    border-radius: 50%;
-    flex-shrink: 0;
-  }
+  .marquee-dot { width: 4px; height: 4px; background: var(--lime); border-radius: 50%; flex-shrink: 0; }
 
-  /* Problem section */
+  /* Problem */
   .section-problem {
     padding: 120px 48px;
     display: grid;
@@ -292,12 +265,7 @@
     line-height: 1.7;
     margin-bottom: 32px;
   }
-  .pain-list {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
+  .pain-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
   .pain-item {
     display: flex;
     align-items: flex-start;
@@ -312,19 +280,208 @@
     opacity: 0;
     transition: all 0.4s;
   }
-  .pain-item.visible {
-    transform: translateX(0);
-    opacity: 1;
+  .pain-item.visible { transform: translateX(0); opacity: 1; }
+  .pain-item::before { content: '—'; color: var(--text-muted); font-size: 13px; margin-top: 1px; flex-shrink: 0; }
+
+  /* ── EMERGENCY FINDER ── */
+  .section-emergency {
+    background: var(--black);
+    padding: 120px 48px;
+    position: relative;
+    overflow: hidden;
   }
-  .pain-item::before {
-    content: '—';
-    color: var(--text-muted);
-    font-size: 13px;
-    margin-top: 1px;
+  .section-emergency::before {
+    content: '';
+    position: absolute;
+    top: -150px; left: -150px;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(184,255,61,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .emergency-inner { max-width: 1200px; margin: 0 auto; }
+  .emergency-top {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+  .emergency-badge {
+    background: #ff4444;
+    color: white;
+    font-family: var(--sans);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 100px;
+    margin-top: 6px;
     flex-shrink: 0;
   }
+  .emergency-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(245,242,234,0.35);
+    margin-bottom: 16px;
+  }
+  .emergency-headline {
+    font-family: var(--serif);
+    font-size: clamp(36px, 4vw, 56px);
+    font-weight: 400;
+    line-height: 1.1;
+    color: var(--bone);
+    letter-spacing: -0.02em;
+    max-width: 680px;
+    margin-bottom: 16px;
+  }
+  .emergency-sub {
+    font-size: 17px;
+    color: rgba(245,242,234,0.45);
+    max-width: 560px;
+    line-height: 1.7;
+    margin-bottom: 56px;
+  }
+  .finder-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 2px;
+    margin-bottom: 32px;
+  }
+  .finder-card {
+    background: rgba(245,242,234,0.04);
+    border: 1px solid rgba(245,242,234,0.06);
+    padding: 28px;
+    transition: all 0.25s;
+    cursor: none;
+    position: relative;
+    overflow: hidden;
+  }
+  .finder-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--lime);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s;
+  }
+  .finder-card:hover { background: rgba(245,242,234,0.08); transform: translateY(-2px); }
+  .finder-card:hover::after { transform: scaleX(1); }
+  .finder-num {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    color: var(--lime);
+    margin-bottom: 10px;
+  }
+  .finder-situation {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--bone);
+    margin-bottom: 14px;
+    line-height: 1.3;
+  }
+  .finder-path {
+    font-size: 12px;
+    color: rgba(245,242,234,0.4);
+    line-height: 2;
+    font-family: var(--sans);
+  }
+  .finder-path strong { color: var(--lime); font-weight: 500; }
+  .finder-rule {
+    background: rgba(184,255,61,0.06);
+    border: 1px solid rgba(184,255,61,0.15);
+    border-left: 3px solid var(--lime);
+    padding: 20px 24px;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    border-radius: 0 4px 4px 0;
+  }
+  .finder-rule p {
+    font-size: 13px;
+    color: rgba(245,242,234,0.6);
+    line-height: 1.7;
+  }
+  .finder-rule p strong { color: var(--lime); font-weight: 600; }
 
-  /* Product section */
+  /* ── PHOTOGRAPHER HOOK ── */
+  .section-photographer {
+    padding: 120px 48px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .photographer-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+  .photographer-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 24px;
+  }
+  .photographer-headline {
+    font-family: var(--serif);
+    font-size: clamp(32px, 4vw, 48px);
+    font-weight: 400;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 24px;
+  }
+  .photographer-headline em { font-style: italic; color: var(--text-muted); }
+  .photographer-body {
+    font-size: 16px;
+    color: var(--text-muted);
+    line-height: 1.75;
+    margin-bottom: 32px;
+  }
+  .photo-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .photo-list li {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    font-size: 14px;
+    color: var(--black);
+    line-height: 1.5;
+  }
+  .photo-list li::before { content: '→'; color: var(--black); font-size: 13px; flex-shrink: 0; margin-top: 1px; }
+  .scenario-stack { display: flex; flex-direction: column; gap: 8px; }
+  .scenario-card {
+    background: white;
+    border: 1px solid rgba(16,17,20,0.06);
+    border-radius: 12px;
+    padding: 16px 20px;
+    transition: all 0.25s;
+    cursor: none;
+  }
+  .scenario-card:hover {
+    border-color: var(--black);
+    transform: translateX(4px);
+  }
+  .scenario-trigger {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--black);
+    margin-bottom: 4px;
+    line-height: 1.4;
+  }
+  .scenario-trigger::before { content: '"'; }
+  .scenario-trigger::after { content: '"'; }
+  .scenario-code {
+    font-size: 12px;
+    color: var(--text-muted);
+    font-family: monospace;
+  }
+
+  /* Product */
   .section-product {
     background: var(--black);
     padding: 120px 48px;
@@ -334,19 +491,14 @@
   .section-product::before {
     content: '';
     position: absolute;
-    top: -200px;
-    right: -200px;
-    width: 600px;
-    height: 600px;
+    top: -200px; right: -200px;
+    width: 600px; height: 600px;
     background: var(--lime);
     border-radius: 50%;
     opacity: 0.06;
     pointer-events: none;
   }
-  .product-inner {
-    max-width: 1200px;
-    margin: 0 auto;
-  }
+  .product-inner { max-width: 1200px; margin: 0 auto; }
   .product-top {
     display: flex;
     justify-content: space-between;
@@ -382,7 +534,6 @@
     letter-spacing: -0.04em;
     user-select: none;
   }
-
   .categories-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -401,45 +552,21 @@
   .category-card::after {
     content: '';
     position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
+    bottom: 0; left: 0; right: 0;
     height: 2px;
     background: var(--lime);
     transform: scaleX(0);
     transform-origin: left;
     transition: transform 0.3s;
   }
-  .category-card:hover {
-    background: rgba(245,242,234,0.08);
-    transform: translateY(-2px);
-  }
+  .category-card:hover { background: rgba(245,242,234,0.08); transform: translateY(-2px); }
   .category-card:hover::after { transform: scaleX(1); }
-  .category-num {
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.1em;
-    color: var(--lime);
-    margin-bottom: 10px;
-  }
-  .category-name {
-    font-size: 16px;
-    font-weight: 500;
-    color: var(--bone);
-    margin-bottom: 6px;
-    line-height: 1.3;
-  }
-  .category-count {
-    font-size: 13px;
-    color: rgba(245,242,234,0.4);
-  }
+  .category-num { font-size: 11px; font-weight: 500; letter-spacing: 0.1em; color: var(--lime); margin-bottom: 10px; }
+  .category-name { font-size: 16px; font-weight: 500; color: var(--bone); margin-bottom: 6px; line-height: 1.3; }
+  .category-count { font-size: 13px; color: rgba(245,242,234,0.4); }
 
-  /* Social proof */
-  .section-proof {
-    padding: 120px 48px;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
+  /* Proof */
+  .section-proof { padding: 120px 48px; max-width: 1200px; margin: 0 auto; }
   .proof-label {
     font-size: 11px;
     font-weight: 500;
@@ -449,11 +576,7 @@
     margin-bottom: 64px;
     text-align: center;
   }
-  .testimonials {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
-  }
+  .testimonials { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
   .testimonial {
     background: white;
     border: 1px solid rgba(16,17,20,0.06);
@@ -462,10 +585,7 @@
     transition: transform 0.25s, box-shadow 0.25s;
     cursor: none;
   }
-  .testimonial:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 20px 60px rgba(16,17,20,0.08);
-  }
+  .testimonial:hover { transform: translateY(-4px); box-shadow: 0 20px 60px rgba(16,17,20,0.08); }
   .testimonial-text {
     font-family: var(--serif);
     font-size: 18px;
@@ -474,28 +594,12 @@
     color: var(--black);
     margin-bottom: 24px;
   }
-  .testimonial-author {
-    font-size: 13px;
-    font-weight: 500;
-    color: var(--text-muted);
-  }
-  .testimonial-role {
-    font-size: 12px;
-    color: var(--text-muted);
-    opacity: 0.6;
-    margin-top: 2px;
-  }
+  .testimonial-author { font-size: 13px; font-weight: 500; color: var(--text-muted); }
+  .testimonial-role { font-size: 12px; color: var(--text-muted); opacity: 0.6; margin-top: 2px; }
 
   /* Pricing */
-  .section-pricing {
-    background: var(--black);
-    padding: 120px 48px;
-  }
-  .pricing-inner {
-    max-width: 600px;
-    margin: 0 auto;
-    text-align: center;
-  }
+  .section-pricing { background: var(--black); padding: 120px 48px; }
+  .pricing-inner { max-width: 600px; margin: 0 auto; text-align: center; }
   .pricing-label {
     font-size: 11px;
     font-weight: 500;
@@ -513,12 +617,7 @@
     letter-spacing: -0.02em;
     margin-bottom: 16px;
   }
-  .pricing-sub {
-    font-size: 16px;
-    color: rgba(245,242,234,0.45);
-    margin-bottom: 48px;
-    line-height: 1.6;
-  }
+  .pricing-sub { font-size: 16px; color: rgba(245,242,234,0.45); margin-bottom: 48px; line-height: 1.6; }
   .pricing-card {
     background: var(--bone);
     border-radius: 24px;
@@ -529,9 +628,7 @@
   .pricing-card::before {
     content: '';
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
+    top: 0; left: 0; right: 0;
     height: 3px;
     background: var(--lime);
   }
@@ -544,35 +641,13 @@
     letter-spacing: -0.04em;
     margin-bottom: 4px;
   }
-  .price-amount sup {
-    font-size: 32px;
-    vertical-align: super;
-    letter-spacing: 0;
-  }
-  .price-note {
-    font-size: 13px;
-    color: var(--text-muted);
-    margin-bottom: 32px;
-  }
-  .price-features {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    margin-bottom: 40px;
-    text-align: left;
-  }
-  .price-feature {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    font-size: 15px;
-    color: var(--black);
-  }
+  .price-amount sup { font-size: 32px; vertical-align: super; letter-spacing: 0; }
+  .price-note { font-size: 13px; color: var(--text-muted); margin-bottom: 32px; }
+  .price-features { list-style: none; display: flex; flex-direction: column; gap: 12px; margin-bottom: 40px; text-align: left; }
+  .price-feature { display: flex; align-items: center; gap: 12px; font-size: 15px; color: var(--black); }
   .price-feature::before {
     content: '';
-    width: 6px;
-    height: 6px;
+    width: 6px; height: 6px;
     background: var(--lime);
     border-radius: 50%;
     flex-shrink: 0;
@@ -607,12 +682,7 @@
   .btn-checkout:hover::after { transform: translateY(0); }
   .btn-checkout:hover { color: var(--black); }
   .btn-checkout span { position: relative; z-index: 1; }
-  .checkout-guarantee {
-    font-size: 12px;
-    color: var(--text-muted);
-    margin-top: 16px;
-    text-align: center;
-  }
+  .checkout-guarantee { font-size: 12px; color: var(--text-muted); margin-top: 16px; text-align: center; }
 
   /* Footer */
   footer {
@@ -624,57 +694,28 @@
     flex-wrap: wrap;
     gap: 16px;
   }
-  .footer-logo {
-    font-family: var(--sans);
-    font-size: 16px;
-    font-weight: 600;
-    letter-spacing: -0.04em;
-    color: var(--black);
-    text-decoration: none;
-  }
+  .footer-logo { font-family: var(--sans); font-size: 16px; font-weight: 600; letter-spacing: -0.04em; color: var(--black); text-decoration: none; }
   .footer-logo span { font-weight: 400; }
-  .footer-note {
-    font-size: 13px;
-    color: var(--text-muted);
-  }
-  .footer-ig {
-    font-size: 13px;
-    font-weight: 500;
-    color: var(--black);
-    text-decoration: none;
-    transition: color 0.2s;
-  }
+  .footer-note { font-size: 13px; color: var(--text-muted); }
+  .footer-ig { font-size: 13px; font-weight: 500; color: var(--black); text-decoration: none; transition: color 0.2s; }
   .footer-ig:hover { color: var(--text-muted); }
 
   /* Animations */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(24px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
-  @keyframes marquee {
-    from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
-  }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
-  .reveal {
-    opacity: 0;
-    transform: translateY(32px);
-    transition: opacity 0.7s, transform 0.7s;
-  }
-  .reveal.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  .reveal { opacity: 0; transform: translateY(32px); transition: opacity 0.7s, transform 0.7s; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
 
   /* Responsive */
   @media (max-width: 768px) {
     nav { padding: 16px 24px; }
     .hero { padding: 100px 24px 60px; }
     .section-problem { grid-template-columns: 1fr; padding: 80px 24px; gap: 48px; }
+    .section-emergency { padding: 80px 24px; }
+    .section-photographer { padding: 80px 24px; }
+    .photographer-inner { grid-template-columns: 1fr; gap: 48px; }
     .section-product { padding: 80px 24px; }
     .section-proof { padding: 80px 24px; }
     .testimonials { grid-template-columns: 1fr; }
@@ -701,22 +742,20 @@
     Client emails you should not be<br>
     <em>writing from scratch.</em>
   </h1>
-  <p class="hero-sub">
-    150 plug-and-play email and DM templates for service business owners. Late payments, scope creep, difficult clients. Say it right. Every time.
-  </p>
+  <p class="hero-sub">150 plug-and-play email and DM templates for service business owners. Late payments, scope creep, difficult clients. Say it right. Every time.</p>
   <div class="hero-actions">
-    <a href="#pricing" class="btn-primary">
+    <a href="https://stan.store/sendtoolkit" class="btn-primary">
       <span>Get instant access</span>
       <span class="arrow">→</span>
     </a>
-    <a href="#product" class="btn-ghost">See what's inside ↓</a>
+    <a href="#emergency" class="btn-ghost">See the Emergency Finder ↓</a>
   </div>
   <p class="hero-price-note">$37 one-time · Instant download · Notion doc · Use it today</p>
 </section>
 
 <!-- Marquee -->
 <div class="marquee-wrap">
-  <div class="marquee-track" id="marquee">
+  <div class="marquee-track">
     <div class="marquee-item"><span class="marquee-dot"></span>Late payment follow-ups</div>
     <div class="marquee-item"><span class="marquee-dot"></span>Scope creep responses</div>
     <div class="marquee-item"><span class="marquee-dot"></span>Price pushback scripts</div>
@@ -756,6 +795,108 @@
   </ul>
 </section>
 
+<!-- Emergency Finder -->
+<section class="section-emergency" id="emergency">
+  <div class="emergency-inner">
+    <div class="emergency-top reveal">
+      <span class="emergency-badge">🚨 Emergency</span>
+      <p class="emergency-label">Emergency Finder</p>
+    </div>
+    <h2 class="emergency-headline reveal">Something just happened. Go straight to the right template.</h2>
+    <p class="emergency-sub reveal">Don't browse 150 templates when you're panicking. Find your situation. The Finder tells you exactly which templates to send and in what order.</p>
+    <div class="finder-grid">
+      <div class="finder-card reveal">
+        <div class="finder-num">SITUATION 01</div>
+        <div class="finder-situation">Client has not paid</div>
+        <div class="finder-path">Start with <strong>LPF-01</strong><br>Then <strong>LPF-03</strong><br>Then <strong>LPF-04</strong> if no response</div>
+      </div>
+      <div class="finder-card reveal">
+        <div class="finder-num">SITUATION 02</div>
+        <div class="finder-situation">Client added work without approval</div>
+        <div class="finder-path">Start with <strong>SCR-01</strong><br>Then <strong>SCR-09</strong><br>Then <strong>SCR-10</strong> if no response</div>
+      </div>
+      <div class="finder-card reveal">
+        <div class="finder-num">SITUATION 03</div>
+        <div class="finder-situation">Client wants a discount</div>
+        <div class="finder-path">Start with <strong>PPD-01</strong><br>Then <strong>PPD-07</strong><br>Then <strong>PPD-08</strong> if no response</div>
+      </div>
+      <div class="finder-card reveal">
+        <div class="finder-num">SITUATION 04</div>
+        <div class="finder-situation">Client is being rude or disrespectful</div>
+        <div class="finder-path">Start with <strong>DDC-01</strong><br>Then <strong>DDC-06</strong><br>Then <strong>DDC-07</strong> if no response</div>
+      </div>
+      <div class="finder-card reveal">
+        <div class="finder-num">SITUATION 05</div>
+        <div class="finder-situation">Client is ghosting</div>
+        <div class="finder-path">Start with <strong>GFU-01</strong><br>Then <strong>GFU-02</strong><br>Then <strong>GFU-05</strong> if no response</div>
+      </div>
+      <div class="finder-card reveal">
+        <div class="finder-num">SITUATION 06</div>
+        <div class="finder-situation">Project is delayed or something went wrong</div>
+        <div class="finder-path">Start with <strong>PDM-01</strong><br>Then <strong>PDM-02</strong><br>Then <strong>PDM-10</strong> if no response</div>
+      </div>
+      <div class="finder-card reveal">
+        <div class="finder-num">SITUATION 07</div>
+        <div class="finder-situation">Client wants to cancel</div>
+        <div class="finder-path">Start with <strong>FAC-01</strong><br>Then <strong>FAC-06</strong><br>Then <strong>FAC-10</strong> if no response</div>
+      </div>
+      <div class="finder-card reveal">
+        <div class="finder-num">SITUATION 08</div>
+        <div class="finder-situation">You need to fire the client</div>
+        <div class="finder-path">Start with <strong>DDC-07</strong><br>Then <strong>FAC-02</strong><br>Then <strong>FAC-10</strong> if no response</div>
+      </div>
+    </div>
+    <div class="finder-rule reveal">
+      <p><strong>Operator Rules:</strong> State the boundary. Do not over-explain. One message, one ask, one next step. If there is no response, escalate on a timeline.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Photographer Hook -->
+<section class="section-photographer">
+  <div class="photographer-inner">
+    <div class="reveal">
+      <p class="photographer-label">Built for Photographers Too</p>
+      <h2 class="photographer-headline">You shoot beautifully. You shouldn't have to write <em>this</em> beautifully too.</h2>
+      <p class="photographer-body">Photographers deal with some of the most emotionally charged client situations in any service business. Late galleries, RAW file requests, reshoot demands, ghosted inquiries. The Firefighter has the exact words for all of it.</p>
+      <ul class="photo-list">
+        <li>Client asks for RAW files after delivery</li>
+        <li>Someone wants a reshoot because they don't like how they look</li>
+        <li>Inquiry goes quiet after you send the quote</li>
+        <li>Client adds three family members day of the session</li>
+        <li>Bride wants a full refund after receiving the gallery</li>
+        <li>Client posts your work without crediting you</li>
+      </ul>
+    </div>
+    <div class="scenario-stack reveal">
+      <div class="scenario-card">
+        <div class="scenario-trigger">Can I have the RAW files?</div>
+        <div class="scenario-code">→ Use SCR-03 then SCR-07</div>
+      </div>
+      <div class="scenario-card">
+        <div class="scenario-trigger">I don't love any of these photos</div>
+        <div class="scenario-code">→ Use RCR-08 then DDC-08</div>
+      </div>
+      <div class="scenario-card">
+        <div class="scenario-trigger">Inquiry ghosted after receiving quote</div>
+        <div class="scenario-code">→ Use GFU-04 then GFU-05</div>
+      </div>
+      <div class="scenario-card">
+        <div class="scenario-trigger">Client wants extras not in the contract</div>
+        <div class="scenario-code">→ Use SCR-01 then SCR-09</div>
+      </div>
+      <div class="scenario-card">
+        <div class="scenario-trigger">Late payment on a delivered gallery</div>
+        <div class="scenario-code">→ Use LPF-01 then LPF-03</div>
+      </div>
+      <div class="scenario-card">
+        <div class="scenario-trigger">Client is being disrespectful over DM</div>
+        <div class="scenario-code">→ Use DDC-11 then DDC-15</div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- Product -->
 <section class="section-product" id="product">
   <div class="product-inner">
@@ -767,61 +908,21 @@
       <div class="product-count reveal">150</div>
     </div>
     <div class="categories-grid">
-      <div class="category-card reveal">
-        <div class="category-num">01</div>
-        <div class="category-name">Late Payment Follow-Ups</div>
-        <div class="category-count">15 templates · Full escalation arc</div>
-      </div>
-      <div class="category-card reveal">
-        <div class="category-num">02</div>
-        <div class="category-name">Scope Creep Responses</div>
-        <div class="category-count">15 templates · Firm and professional</div>
-      </div>
-      <div class="category-card reveal">
-        <div class="category-num">03</div>
-        <div class="category-name">Price Pushback Scripts</div>
-        <div class="category-count">15 templates · Hold the line</div>
-      </div>
-      <div class="category-card reveal">
-        <div class="category-num">04</div>
-        <div class="category-name">Project Delays and Bad News</div>
-        <div class="category-count">15 templates · Own it and move forward</div>
-      </div>
-      <div class="category-card reveal">
-        <div class="category-num">05</div>
-        <div class="category-name">Difficult Client Responses</div>
-        <div class="category-count">15 templates · No emotional reactions</div>
-      </div>
-      <div class="category-card reveal">
-        <div class="category-num">06</div>
-        <div class="category-name">Firing a Client</div>
-        <div class="category-count">10 templates · Clean exits</div>
-      </div>
-      <div class="category-card reveal">
-        <div class="category-num">07</div>
-        <div class="category-name">Onboarding and Boundaries</div>
-        <div class="category-count">15 templates · Set the tone early</div>
-      </div>
-      <div class="category-card reveal">
-        <div class="category-num">08</div>
-        <div class="category-name">Revision Management</div>
-        <div class="category-count">15 templates · Stop the endless loop</div>
-      </div>
-      <div class="category-card reveal">
-        <div class="category-num">09</div>
-        <div class="category-name">Ghosting Follow-Ups</div>
-        <div class="category-count">10 templates · No guilt trips</div>
-      </div>
-      <div class="category-card reveal">
-        <div class="category-num">10</div>
-        <div class="category-name">Referral and Review Requests</div>
-        <div class="category-count">15 templates · Turn clients into marketing</div>
-      </div>
+      <div class="category-card reveal"><div class="category-num">01</div><div class="category-name">Late Payment Follow-Ups</div><div class="category-count">15 templates · Full escalation arc</div></div>
+      <div class="category-card reveal"><div class="category-num">02</div><div class="category-name">Scope Creep Responses</div><div class="category-count">15 templates · Firm and professional</div></div>
+      <div class="category-card reveal"><div class="category-num">03</div><div class="category-name">Price Pushback Scripts</div><div class="category-count">15 templates · Hold the line</div></div>
+      <div class="category-card reveal"><div class="category-num">04</div><div class="category-name">Project Delays and Bad News</div><div class="category-count">15 templates · Own it and move forward</div></div>
+      <div class="category-card reveal"><div class="category-num">05</div><div class="category-name">Difficult Client Responses</div><div class="category-count">15 templates · No emotional reactions</div></div>
+      <div class="category-card reveal"><div class="category-num">06</div><div class="category-name">Firing a Client</div><div class="category-count">10 templates · Clean exits</div></div>
+      <div class="category-card reveal"><div class="category-num">07</div><div class="category-name">Onboarding and Boundaries</div><div class="category-count">15 templates · Set the tone early</div></div>
+      <div class="category-card reveal"><div class="category-num">08</div><div class="category-name">Revision Management</div><div class="category-count">15 templates · Stop the endless loop</div></div>
+      <div class="category-card reveal"><div class="category-num">09</div><div class="category-name">Ghosting Follow-Ups</div><div class="category-count">10 templates · No guilt trips</div></div>
+      <div class="category-card reveal"><div class="category-num">10</div><div class="category-name">Referral and Review Requests</div><div class="category-count">15 templates · Turn clients into marketing</div></div>
     </div>
   </div>
 </section>
 
-<!-- Social proof -->
+<!-- Proof -->
 <section class="section-proof">
   <p class="proof-label reveal">What service owners say</p>
   <div class="testimonials">
@@ -855,12 +956,14 @@
       <ul class="price-features">
         <li class="price-feature">150 plug-and-play email and DM templates</li>
         <li class="price-feature">10 categories covering every client situation</li>
-        <li class="price-feature">Delivered as a searchable Notion doc</li>
+        <li class="price-feature">Emergency Finder — right template in under 10 seconds</li>
+        <li class="price-feature">Full escalation paths for payments and ghosting</li>
         <li class="price-feature">DM versions included for every scenario</li>
+        <li class="price-feature">Delivered as a searchable Notion doc</li>
         <li class="price-feature">Use it the same day you buy it</li>
         <li class="price-feature">Works for any service business</li>
       </ul>
-      <a href="https://stan.store/sendtoolkit" class="btn-checkout"><span>Get The Toolkit — $37</span></a>
+      <a href="https://stan.store/sendtoolkit" class="btn-checkout"><span>Get The Client Firefighter — $37</span></a>
       <p class="checkout-guarantee">Instant access after purchase · Notion account required (free)</p>
     </div>
   </div>
@@ -869,7 +972,7 @@
 <!-- Footer -->
 <footer>
   <a href="#" class="footer-logo">Send<span>Toolkit</span></a>
-  <p class="footer-note">© 2025 Send Toolkit · sendtoolkit.com</p>
+  <p class="footer-note">© 2026 Send Toolkit · sendtoolkit.com</p>
   <a href="https://instagram.com/sendtoolkit" class="footer-ig">@sendtoolkit</a>
 </footer>
 
@@ -880,7 +983,7 @@
     cursor.style.left = e.clientX + 'px';
     cursor.style.top = e.clientY + 'px';
   });
-  document.querySelectorAll('a, button, .category-card, .testimonial').forEach(el => {
+  document.querySelectorAll('a, button, .category-card, .testimonial, .finder-card, .scenario-card').forEach(el => {
     el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
     el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
   });
