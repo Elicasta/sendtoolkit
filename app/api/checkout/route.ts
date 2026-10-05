@@ -24,6 +24,7 @@ export async function POST(request: Request) {
     }
 
     const stripe = getStripe();
+    const taxEnabled = process.env.STRIPE_TAX_ENABLED === "true";
     const cookieStore = await cookies();
     const firstTouch = cookieStore.get("st_attribution")?.value;
     const referral = cookieStore.get("st_ref")?.value;
@@ -39,12 +40,13 @@ export async function POST(request: Request) {
       {
         mode: "payment",
         line_items: lineItems,
-        automatic_tax: { enabled: true },
+        automatic_tax: { enabled: taxEnabled },
         customer_creation: "always",
         allow_promotion_codes: true,
-        billing_address_collection: "auto",
+        billing_address_collection: taxEnabled ? "required" : "auto",
         success_url: publicEnv.NEXT_PUBLIC_SITE_URL + "/thank-you?session_id={CHECKOUT_SESSION_ID}",
         cancel_url: publicEnv.NEXT_PUBLIC_SITE_URL + "/products/" + product.slug,
+        integration_identifier: "sendtoolkit_web_kpraxmvt",
         metadata: {
           sku: product.sku,
           source: "sendtoolkit-storefront",
