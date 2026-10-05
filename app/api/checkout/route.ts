@@ -41,6 +41,7 @@ export async function POST(request: Request) {
         mode: "payment",
         line_items: lineItems,
         automatic_tax: { enabled: taxEnabled },
+        managed_payments: { enabled: false },
         customer_creation: "always",
         allow_promotion_codes: true,
         billing_address_collection: taxEnabled ? "required" : "auto",
