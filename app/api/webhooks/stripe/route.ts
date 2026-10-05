@@ -91,27 +91,44 @@ export async function POST(request: Request) {
   }
 
   const supabase = createAdminClient();
-  const { error: insertError } = await supabase
+  const { data: existingEvent, error: existingError } = await supabase
     .from("stripe_webhook_events")
-    .insert({
-      stripe_event_id: event.id,
-      event_type: event.type,
-      payload: event,
-      status: "received"
-    });
+    .select("status")
+    .eq("stripe_event_id", event.id)
+    .maybeSingle();
 
-  if (insertError) {
-    if (insertError.code === "23505") {
-      return NextResponse.json({ received: true, duplicate: true });
+  if (existingError) {
+    return NextResponse.json({ error: "event_lookup_failed" }, { status: 500 });
+  }
+
+  if (existingEvent?.status === "processed") {
+    return NextResponse.json({ received: true, duplicate: true });
+  }
+
+  if (!existingEvent) {
+    const { error: insertError } = await supabase
+      .from("stripe_webhook_events")
+      .insert({
+        stripe_event_id: event.id,
+        event_type: event.type,
+        payload: event,
+        status: "received"
+      });
+
+    if (insertError && insertError.code !== "23505") {
+      return NextResponse.json({ error: "event_log_failed" }, { status: 500 });
     }
-    return NextResponse.json({ error: "event_log_failed" }, { status: 500 });
   }
 
   try {
-    if (
-      event.type === "checkout.session.completed" ||
-      event.type === "checkout.session.async_payment_succeeded"
-    ) {
+    if (event.type === "checkout.session.completed") {
+      const session = event.data.object as Stripe.Checkout.Session;
+      if (session.payment_status !== "unpaid") {
+        await recordPaidOrder(session);
+      }
+    }
+
+    if (event.type === "checkout.session.async_payment_succeeded") {
       await recordPaidOrder(event.data.object as Stripe.Checkout.Session);
     }
 
