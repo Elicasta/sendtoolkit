@@ -1,4 +1,4 @@
-const FALLBACK_STORE = 'https://stan.store/sendtoolkit/p/the-client-firefighter';
+const DEFAULT_STORE = 'https://stan.store/sendtoolkit/p/the-client-firefighter';
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -6,16 +6,34 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'method_not_allowed' });
   }
 
-  const fallbackUrl = process.env.STAN_STORE_URL || FALLBACK_STORE;
-  const checkoutMode = (process.env.CHECKOUT_MODE || 'stan').toLowerCase();
+  const publicSiteUrl = (process.env.PUBLIC_SITE_URL || 'https://sendtoolkit.com').replace(/\/$/, '');
+  const checkoutMode = (process.env.CHECKOUT_MODE || 'waitlist').toLowerCase();
   const stripeSecret = process.env.STRIPE_SECRET_KEY;
   const stripePrice = process.env.STRIPE_PRICE_ID;
 
-  if (checkoutMode !== 'stripe' || !stripeSecret || !stripePrice) {
-    return res.status(200).json({ provider: 'stan', url: fallbackUrl });
+  if (checkoutMode === 'waitlist') {
+    return res.status(200).json({
+      provider: 'waitlist',
+      available: false,
+      url: `${publicSiteUrl}/#updates`,
+      message: 'Direct checkout is being connected.'
+    });
   }
 
-  const publicSiteUrl = (process.env.PUBLIC_SITE_URL || 'https://sendtoolkit.com').replace(/\/$/, '');
+  if (checkoutMode === 'stan') {
+    const storeUrl = process.env.STAN_STORE_URL || DEFAULT_STORE;
+    return res.status(200).json({ provider: 'stan', available: true, url: storeUrl });
+  }
+
+  if (checkoutMode !== 'stripe' || !stripeSecret || !stripePrice) {
+    return res.status(503).json({
+      error: 'checkout_unavailable',
+      provider: 'waitlist',
+      available: false,
+      url: `${publicSiteUrl}/#updates`
+    });
+  }
+
   const params = new URLSearchParams();
   params.set('mode', 'payment');
   params.set('line_items[0][price]', stripePrice);
@@ -38,14 +56,30 @@ export default async function handler(req, res) {
     });
 
     const session = await stripeResponse.json();
+
     if (!stripeResponse.ok || !session.url) {
-      console.error('Stripe checkout session failed', { status: stripeResponse.status, code: session?.error?.code || 'unknown' });
-      return res.status(502).json({ error: 'checkout_unavailable', url: fallbackUrl });
+      console.error('Stripe checkout session failed', {
+        status: stripeResponse.status,
+        code: session?.error?.code || 'unknown'
+      });
+
+      return res.status(503).json({
+        error: 'checkout_unavailable',
+        provider: 'waitlist',
+        available: false,
+        url: `${publicSiteUrl}/#updates`
+      });
     }
 
-    return res.status(200).json({ provider: 'stripe', url: session.url });
+    return res.status(200).json({ provider: 'stripe', available: true, url: session.url });
   } catch (error) {
     console.error('Stripe request failed', { message: error?.message || 'unknown' });
-    return res.status(502).json({ error: 'checkout_unavailable', url: fallbackUrl });
+
+    return res.status(503).json({
+      error: 'checkout_unavailable',
+      provider: 'waitlist',
+      available: false,
+      url: `${publicSiteUrl}/#updates`
+    });
   }
 }
