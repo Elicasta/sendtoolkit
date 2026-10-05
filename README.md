@@ -56,6 +56,24 @@ The refund page intentionally remains marked incomplete until the actual refund 
 
 See `docs/storefront-build-spec.md`.
 
+## Milestone B: Money
+
+Scaffolded on `storefront-v1`:
+
+- hosted Stripe Checkout session creation
+- server-owned Core and Lite Price IDs
+- Stripe automatic tax
+- promotion-code support
+- request idempotency for checkout starts
+- signed Stripe webhook verification
+- webhook replay protection
+- atomic paid-order database RPC
+- refund state updates
+- first-touch UTM and 60-day affiliate-ref cookies
+- safe thank-you placeholder with no private delivery link
+
+The checkout UI remains disabled until the intended Stripe account is connected.
+
 ## Next milestone
 
-Milestone B wires Stripe Checkout, signed webhooks, order persistence, refunds, and idempotency after the intended Stripe account and SendToolkit Supabase project are connected.
+Milestone C validates the paid Checkout Session on the thank-you page, delivers the purchased asset, sends the delivery email, and logs delivery state.
