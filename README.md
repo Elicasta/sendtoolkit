@@ -42,3 +42,7 @@ Brand/product assets in `/assets` are the existing SendToolkit visuals supplied 
 ## Deployment
 
 Vercel Git integration deploys `main` to production and feature branches to previews. Runtime credentials stay in Vercel environment variables, never in this repository.
+
+## Inactive checkout safety
+
+When no payment provider is active, purchase CTAs stay on SendToolkit and route buyers to the access list instead of an unavailable third-party store.
