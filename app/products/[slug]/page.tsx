@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { products, type ProductSlug } from "@/lib/products";
+import { CheckoutButton } from "@/components/checkout-button";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -27,6 +28,11 @@ export default async function ProductPage({ params }: Props) {
     maximumFractionDigits: 0
   }).format(product.priceCents / 100);
 
+  const checkoutEnabled = Boolean(
+    process.env.STRIPE_SECRET_KEY &&
+    (product.slug === "core" ? process.env.STRIPE_PRICE_CORE : process.env.STRIPE_PRICE_LITE)
+  );
+
   return (
     <>
       <section className="productHero dark">
@@ -39,10 +45,14 @@ export default async function ProductPage({ params }: Props) {
           <aside className="buyCard">
             <div className="buyPrice">{price}</div>
             <p>One-time purchase.</p>
-            <button className="button lime full" type="button" disabled>
-              Checkout connecting
-            </button>
-            <small>Stripe Checkout will replace this disabled state before traffic goes live.</small>
+            <CheckoutButton
+              sku={product.sku}
+              label={product.cta + " · " + price}
+              enabled={checkoutEnabled}
+            />
+            <small>
+              Secure checkout is hosted by Stripe. Card and eligible wallet methods appear there.
+            </small>
           </aside>
         </div>
       </section>
