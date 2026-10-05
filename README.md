@@ -1,48 +1,61 @@
-# SendToolkit sales site
+# SendToolkit storefront
 
-Sales funnel for **The Client Firefighter**.
+Next.js storefront for **The Client Firefighter** and future SendToolkit products.
 
-## Current checkout
+## Branch
 
-The site calls `/api/checkout`. Until Stripe is connected, the endpoint returns the Stan Store product URL.
+Active build branch: `storefront-v1`
 
-Environment variables already expected by the code:
+Production remains on `main` until the storefront passes end-to-end purchase and delivery testing.
 
-- `CHECKOUT_MODE=stan` now. Change to `stripe` when ready.
-- `STAN_STORE_URL=https://stan.store/sendtoolkit/p/the-client-firefighter`
-- `PUBLIC_SITE_URL=https://sendtoolkit.com`
-- `STRIPE_SECRET_KEY` when the new Stripe account is connected.
-- `STRIPE_PRICE_ID` for the $37 one-time Client Firefighter price.
+## Stack
 
-When `CHECKOUT_MODE=stripe` and both Stripe variables exist, all site buy buttons automatically create a hosted Stripe Checkout Session.
+- Next.js App Router + TypeScript
+- Vercel
+- Stripe Checkout
+- Supabase Postgres
+- Resend
+- PostHog
 
-## Product update list
+## Products
 
-`/api/subscribe` stores opt-in contacts in Resend and adds them to the SendToolkit Product Updates segment.
+- Core: $37
+- Lite: $19
+- Free mini pack: 10–12 templates
 
-Expected variables:
+Product definitions live in `lib/products.ts`.
 
-- `RESEND_API_KEY` with contact-management access.
-- `RESEND_SEGMENT_ID=84c3d3c7-0699-487c-b8c0-af7518444385`
+## Database
 
-The segment itself already exists in Resend.
+The initial schema is committed at:
 
-## Before switching checkout to Stripe
+`supabase/migrations/20261005_storefront_foundation.sql`
 
-1. Connect the intended Stripe account.
-2. Create a one-time $37 Price.
-3. Add `STRIPE_SECRET_KEY` and `STRIPE_PRICE_ID` in Vercel.
-4. Add fulfillment for the digital product before changing `CHECKOUT_MODE` to `stripe`.
-5. Test checkout in Stripe test mode, then swap to live credentials.
+The migration has not been applied yet because no SendToolkit Supabase project exists on the connected Supabase account. Do not apply it to another project.
 
-## Assets
+## Checkout safety
 
-Brand/product assets in `/assets` are the existing SendToolkit visuals supplied for the product.
+Paid checkout buttons remain disabled until the intended Stripe account and product Price IDs are connected. The storefront does not fall back to the inactive Stan Store.
 
-## Deployment
+## Legal
 
-Vercel Git integration deploys `main` to production and feature branches to previews. Runtime credentials stay in Vercel environment variables, never in this repository.
+Current routes:
 
-## Inactive checkout safety
+- `/privacy`
+- `/terms`
+- `/refund-policy`
+- `/disclaimer`
 
-When no payment provider is active, purchase CTAs stay on SendToolkit and route buyers to the access list instead of an unavailable third-party store.
+The refund page intentionally remains marked incomplete until the actual refund window is chosen.
+
+## Health
+
+`GET /api/health` reports whether checkout and database configuration are present without exposing credentials.
+
+## Build spec
+
+See `docs/storefront-build-spec.md`.
+
+## Next milestone
+
+Milestone B wires Stripe Checkout, signed webhooks, order persistence, refunds, and idempotency after the intended Stripe account and SendToolkit Supabase project are connected.
