@@ -24,12 +24,9 @@ async function recordPaidOrder(session: Stripe.Checkout.Session) {
 
   if (!email || !sku) throw new Error("Checkout is missing fulfillment metadata.");
 
-  let attribution: Record<string, string> = {};
-  try {
-    attribution = session.metadata?.attribution ? JSON.parse(session.metadata.attribution) : {};
-  } catch {
-    attribution = {};
-  }
+  const attribution = session.metadata?.attribution
+    ? Object.fromEntries(new URLSearchParams(session.metadata.attribution))
+    : {};
 
   const supabase = createAdminClient();
   const { error } = await supabase.rpc("record_paid_order", {
