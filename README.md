@@ -77,3 +77,19 @@ The checkout UI remains disabled until the intended Stripe account is connected.
 ## Next milestone
 
 Milestone C validates the paid Checkout Session on the thank-you page, delivers the purchased asset, sends the delivery email, and logs delivery state.
+
+## Stripe sandbox
+
+The connected Stripe account currently exposed to this build is **Send Toolkit sandbox**.
+
+Created in sandbox:
+- Core product: `prod_VNpcSYpUr1qC9b`
+- Core price ($37): `price_1UN3x4KBSg229SLEks6741xL`
+- Lite product: `prod_VNpc8nRG2mjmG3`
+- Lite price ($19): `price_1UN3xHKBSg229SLEdEqFDtgI`
+
+The sandbox has Stripe Managed Payments enabled by default. The storefront intentionally disables Managed Payments per Checkout Session because the approved architecture keeps SendToolkit as the merchant and uses standard hosted Stripe Checkout.
+
+Stripe Tax is intentionally disabled until Tax Settings have a head office and confirmed active registrations. The sandbox Tax Settings status is currently `pending` and has no registrations.
+
+The runtime still needs a restricted Stripe API key in Vercel before storefront Checkout buttons can be enabled.
