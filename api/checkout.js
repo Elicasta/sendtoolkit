@@ -15,7 +15,7 @@ export default async function handler(req, res) {
     return res.status(200).json({
       provider: 'waitlist',
       available: false,
-      url: `${publicSiteUrl}/#updates`,
+      url: '/#updates',
       message: 'Direct checkout is being connected.'
     });
   }
@@ -30,7 +30,7 @@ export default async function handler(req, res) {
       error: 'checkout_unavailable',
       provider: 'waitlist',
       available: false,
-      url: `${publicSiteUrl}/#updates`
+      url: '/#updates'
     });
   }
 
@@ -67,7 +67,7 @@ export default async function handler(req, res) {
         error: 'checkout_unavailable',
         provider: 'waitlist',
         available: false,
-        url: `${publicSiteUrl}/#updates`
+        url: '/#updates'
       });
     }
 
@@ -79,7 +79,7 @@ export default async function handler(req, res) {
       error: 'checkout_unavailable',
       provider: 'waitlist',
       available: false,
-      url: `${publicSiteUrl}/#updates`
+      url: '/#updates'
     });
   }
 }
