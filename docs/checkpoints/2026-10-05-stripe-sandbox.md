@@ -32,3 +32,5 @@ Both products were validated by successfully creating hosted Checkout Sessions i
 2. Stripe webhook endpoint and signing secret once the webhook route is publicly reachable.
 3. Dedicated SendToolkit Supabase project for orders and fulfillment.
 4. Live Stripe account/product setup after sandbox E2E tests pass.
+
+Preview build checkpoint requested after Stripe integration changes.
