@@ -27,3 +27,7 @@ External connections still required:
 - Vercel sandbox Stripe secrets scoped to preview/development
 - Supabase service-role secret available server-side
 - Automatic Stripe Tax remains disabled until tax setup is intentionally chosen
+
+## Sandbox domain
+
+The storefront-v1 branch is mapped to `https://sandbox.sendtoolkit.com` for unprotected Stripe sandbox webhook delivery and end-to-end testing. Production remains on `main`.
