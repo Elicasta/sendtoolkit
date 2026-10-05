@@ -38,3 +38,7 @@ The segment itself already exists in Resend.
 ## Assets
 
 Brand/product assets in `/assets` are the existing SendToolkit visuals supplied for the product.
+
+## Deployment
+
+Vercel Git integration deploys `main` to production and feature branches to previews. Runtime credentials stay in Vercel environment variables, never in this repository.
