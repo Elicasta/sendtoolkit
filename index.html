@@ -634,7 +634,7 @@
           <p class="price-note">One-time purchase · Instant access · Current V1 delivered in Notion</p>
           <ul class="feature-list"><li>150 pre-written client responses</li><li>Email and DM version for every situation</li><li>Emergency Finder for eight high-pressure scenarios</li><li>Escalation paths for late payments and ghosting</li><li>10 categories built around real service-business friction</li><li>Edit, personalize, and reuse as often as needed</li></ul>
           <button class="button large" type="button" data-checkout>Get The Client Firefighter · $37 <span aria-hidden="true">→</span></button>
-          <p class="price-fine">Checkout currently runs through Stan Store. Stripe checkout is already scaffolded for the direct-store switch.</p>
+          <p class="price-fine">Direct checkout is being connected. If checkout is temporarily unavailable, we’ll take you to the access list instead of a broken payment page.</p>
         </div>
       </div>
     </section>
@@ -669,8 +669,6 @@
   </div>
 
   <script>
-    const STAN_FALLBACK = 'https://stan.store/sendtoolkit/p/the-client-firefighter';
-
     async function startCheckout(button) {
       if (button.dataset.loading === '1') return;
       const original = button.innerHTML;
