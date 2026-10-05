@@ -6,8 +6,7 @@ import { publicEnv } from "@/lib/env";
 import { getStripe, getStripePriceId } from "@/lib/stripe/server";
 
 const inputSchema = z.object({
-  sku: z.enum(["client-firefighter-core", "client-firefighter-lite"]),
-  includeBump: z.boolean().optional().default(false)
+  sku: z.enum(["client-firefighter-core", "client-firefighter-lite"])
 });
 
 export async function POST(request: Request) {
@@ -31,11 +30,6 @@ export async function POST(request: Request) {
 
     const lineItems = [{ price: priceId, quantity: 1 }];
 
-    if (input.includeBump) {
-      const bumpPrice = getStripePriceId("contract-clause-pack");
-      if (bumpPrice) lineItems.push({ price: bumpPrice, quantity: 1 });
-    }
-
     const requestId =
       request.headers.get("Idempotency-Key") ||
       request.headers.get("x-request-id") ||
@@ -55,8 +49,7 @@ export async function POST(request: Request) {
           sku: product.sku,
           source: "sendtoolkit-storefront",
           attribution: firstTouch || "",
-          ref_code: referral || "",
-          include_bump: input.includeBump ? "1" : "0"
+          ref_code: referral || ""
         }
       },
       { idempotencyKey: "sendtoolkit_checkout_" + requestId }
