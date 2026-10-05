@@ -18,3 +18,12 @@ Included:
 External connections still required:
 - dedicated SendToolkit Supabase project
 - intended SendToolkit Stripe account and Price IDs
+
+## Runtime wiring checkpoint
+
+- Stripe sandbox Core and Lite products created
+- Stripe sandbox webhook destination created
+- Supabase storefront schema applied to SendToolkit project
+- Vercel sandbox Stripe secrets scoped to preview/development
+- Supabase service-role secret available server-side
+- Automatic Stripe Tax remains disabled until tax setup is intentionally chosen
