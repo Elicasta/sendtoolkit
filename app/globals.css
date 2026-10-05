@@ -619,3 +619,15 @@ h1 span { color: #6a6f75; }
 
   .footerInner { display: grid; }
 }
+
+.checkoutStatus,
+.sessionNote {
+  margin-top: 14px;
+  color: #747982;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.dark .sessionNote {
+  color: rgba(245,242,234,.55);
+}
